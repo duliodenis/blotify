@@ -1,0 +1,6 @@
+framework module Pods_Blotify {
+  umbrella header "Pods-Blotify-umbrella.h"
+
+  export *
+  module * { export * }
+}
