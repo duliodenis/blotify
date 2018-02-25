@@ -17,7 +17,7 @@
         <!--Playlist Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="PlaylistController" customModule="Blotify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlaylistController" id="BYZ-38-t0r" customClass="PlaylistController" customModule="Blotify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -42,7 +42,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="124" y="124"/>
+            <point key="canvasLocation" x="124" y="116"/>
         </scene>
         <!--Sign In Controller-->
         <scene sceneID="oWK-OY-cMb">
@@ -80,6 +80,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="otD-WB-PB0"/>
                     </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="PlaylistControllerSegue" id="dZr-6s-b71"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3r9-2x-Vvt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

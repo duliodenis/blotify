@@ -12,8 +12,9 @@ import Alamofire
 class PlaylistController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    var session:SPTSession!
     
-    var searchURL = "https://api.spotify.com/v1/search?q=tania%20bowra&type=artist"
+    var searchURL = "https://api.spotify.com/v1/artists"
     typealias StandardJSON = [String:AnyObject]
     
     override func viewDidLoad() {
@@ -22,8 +23,13 @@ class PlaylistController: UIViewController {
     }
     
     func getSpotifyCatalogWith(url: String) {
-        Alamofire.request(url).responseJSON { (response) in
-            self.parseData(JSONData: response.data!)
+        Alamofire.request(url,
+                          method: .get,
+                          parameters: ["ids":"0oSGxfWSnnOXhD2fKuz2Gy"],
+                          encoding: URLEncoding.default,
+                          headers: ["Authorization": "Bearer "+self.session.accessToken]).responseJSON { (response) in
+                            //print(response)﻿
+                            self.parseData(JSONData: response.data!)
         }
     }
     

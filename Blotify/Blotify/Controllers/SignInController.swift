@@ -28,6 +28,11 @@ class SignInController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSpotify()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(SignInController.updateAfterFirstLogin),
+                                               name: .connectionCompleted,
+                                               object: nil)
     }
     
     @IBAction func signin(_ sender: Any) {
@@ -38,4 +43,29 @@ class SignInController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PlaylistControllerSegue" {
+            print("Segue Invoked")
+            let playlistController = segue.destination as? PlaylistController
+            playlistController?.session = session
+        }
+    }
+    
+    @objc func updateAfterFirstLogin (_ notification: Notification) {
+        print("first login called")
+        if let sessionObj:AnyObject = UserDefaults().object(forKey: "SpotifySession") as AnyObject? {
+            
+            let sessionDataObj = sessionObj as! Data
+            let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
+            
+            self.session = firstTimeSession
+            performSegue(withIdentifier: "PlaylistControllerSegue", sender: self)
+        }
+    }
+    
+}
+
+extension Notification.Name {
+    static let connectionCompleted = Notification.Name(
+        rawValue: "loginSuccessfull")
 }
